@@ -6,23 +6,9 @@ import Modal from './Modal';
 import classes from './PostsList.module.css';
 
 function PostsList({ isPosting, onStopPosting }) {
-  const [enteredBody, setEnteredBody] = useState('');
-  const [enteredAuthor, setEnteredAuthor] = useState('');
-
-  function bodyChangeHandler(event) {
-    setEnteredBody(event.target.value);
-  }
-
-  function onAuthorChangeHandler(event) {
-    setEnteredAuthor(event.target.value);
-  }
-
   let modalContent = (
     <Modal onClose={onStopPosting}>
-      <NewPost
-        onBodyChange={bodyChangeHandler}
-        onAuthorChange={onAuthorChangeHandler}
-      />
+      <NewPost onCancel={onStopPosting} />
     </Modal>
   );
 
@@ -30,7 +16,6 @@ function PostsList({ isPosting, onStopPosting }) {
     <>
       {isPosting && modalContent}
       <ul className={classes.posts}>
-        <Post author={enteredAuthor} body={enteredBody} />
         <Post author="rue" body="test2" />
       </ul>
     </>
